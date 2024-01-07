@@ -9,10 +9,21 @@ function getDrink() {
     .then((res) => res.json()) // parse response as JSON
     .then((data) => {
       console.log(data.drinks);
-      console.log(data.drinks[0]);
-      document.querySelector("h2").innerText = data.drinks[0].strDrink;
-      document.querySelector("img").src = data.drinks[0].strDrinkThumb;
-      document.querySelector("h3").innerText = data.drinks[0].strInstructions;
+      // console.log(data.drinks[0]);
+      // document.querySelector("h2").innerText = data.drinks[0].strDrink;
+      // document.querySelector("img").src = data.drinks[0].strDrinkThumb;
+      // document.querySelector("h3").innerText = data.drinks[0].strInstructions;
+
+      //add obj array to DOM
+      let drinkArr = data.drinks;
+      let items = "";
+      drinkArr.forEach((e) => {
+        items += `<li class="card">
+        <h2>${e.strDrink}</h2>
+        <img src="${e.strDrinkThumb}" alt="">
+        <p>${e.strInstructions}</p>`;
+      });
+      document.querySelector(".drinkList").innerHTML = `${items}`;
     })
     .catch((err) => {
       console.log(`error ${err}`);
